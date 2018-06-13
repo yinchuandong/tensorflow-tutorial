@@ -62,6 +62,7 @@ class DNNNet(object):
         self.loss = - tf.reduce_sum(self.y_true * tf.log(self.y_pred))
         # or format 2:
         # self.loss = tf.losses.softmax_cross_entropy(self.label, self.logits)
+        tf.summary.scalar('loss', self.loss)
         return
 
 
@@ -117,6 +118,7 @@ class CNNNet(object):
         self.loss = - tf.reduce_sum(self.y_true * tf.log(self.y_pred))
         # or format 2:
         # self.loss = tf.losses.softmax_cross_entropy(self.label, self.logits)
+        tf.summary.scalar('loss', self.loss)
         return
 
 
@@ -140,7 +142,9 @@ def main(args):
         # you can call saver.restore(sess) to recover the previous training
 
         merged_summary = tf.summary.merge_all()
-        train_writer = tf.summary.FileWriter("./tmp/log", sess.graph)
+        # you can set separate summaries for train and test
+        # that correspond to multiple runs in tensorboard
+        train_writer = tf.summary.FileWriter("./tmp/train", sess.graph)
 
         train_size = mnist.train.num_examples
         batch_size = 32
@@ -156,7 +160,7 @@ def main(args):
                 net.y_true: batch_label,
             }
             summary, loss, _ = sess.run([merged_summary, net.loss, apply_gradients], feed_dict=feed_dict)
-            train_writer.add_summary(summary)
+            train_writer.add_summary(summary, k)
             print("batch:{} / loss:{}".format(k, loss))
             # break
 
