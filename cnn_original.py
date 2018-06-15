@@ -125,8 +125,8 @@ class CNNNet(object):
 def main(args):
     # refer to: https://github.com/tensorflow/tensorflow/blob/master/tensorflow/contrib/learn/python/learn/datasets/mnist.py
     mnist = input_data.read_data_sets("data/", one_hot=True)
-    net = DNNNet()
-    # net = CNNNet()
+    # net = DNNNet()
+    net = CNNNet()
 
     saver = tf.train.Saver()
     # learning rate can be dynamically adjusted by a placeholder
@@ -144,7 +144,7 @@ def main(args):
         merged_summary = tf.summary.merge_all()
         # you can set separate summaries for train and test
         # that correspond to multiple runs in tensorboard
-        train_writer = tf.summary.FileWriter("./tmp/train", sess.graph)
+        train_writer = tf.summary.FileWriter("./tmp/train_cnn", sess.graph)
 
         train_size = mnist.train.num_examples
         batch_size = 32
