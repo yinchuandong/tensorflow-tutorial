@@ -7,3 +7,27 @@ https://cloud.google.com/blog/big-data/2017/01/learn-tensorflow-and-deep-learnin
 #### Stacked denoising auto encoder:
 1. https://github.com/xiaohu2015/DeepLearning_tutorials
 2. https://github.com/xiaohu2015/DeepLearning_tutorials/blob/master/models/sda.py
+
+
+### kernel
+https://ipython.readthedocs.io/en/stable/install/kernel_install.html
+https://nteract.io/kernels
+
+show kernels
+```
+jupyter kernelspec list --json
+```
+
+In a certain python env, run 
+```
+pyenv local anaconda3-5.2.0
+python -m ipykernel install --user --name anaconda3-5.2.0
+```
+
+or create a virtual env
+```
+
+pyenv virtualenv anaconda3-5.2.0 tf2.0-py3.6.5
+pyenv local tf2.0-py3.6.5
+python -m ipykernel install --user --name tf2.0-py3.6.5
+```
