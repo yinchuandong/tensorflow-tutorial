@@ -31,3 +31,5 @@ pyenv virtualenv anaconda3-5.2.0 tf2.0-py3.6.5
 pyenv local tf2.0-py3.6.5
 python -m ipykernel install --user --name tf2.0-py3.6.5
 ```
+
+in `Hydrogen`, choose `Hydrogen: Start Local Kernel`
