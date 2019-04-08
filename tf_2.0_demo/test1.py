@@ -94,6 +94,7 @@ train, test = datasets.IMDB.splits(TEXT, LABEL)
 TEXT.build_vocab(train, vectors='glove.6B.50d')
 LABEL.build_vocab(train)
 
+print(len(TEXT.vocab) / 32)
 # %%
 args = {
     'embed_num': len(TEXT.vocab),
@@ -140,9 +141,9 @@ epochs = 10
 steps = 0
 best_acc = 0
 last_step = 0
-log_interval = 10
-test_interval = 10
-early_stopping = 10
+log_interval = 1
+test_interval = 100
+early_stopping = 500
 
 model.train()
 
