@@ -18,6 +18,7 @@ show kernels
 jupyter kernelspec list --json
 ```
 
+
 In a certain python env, run 
 ```
 pyenv local anaconda3-5.2.0
@@ -26,10 +27,14 @@ python -m ipykernel install --user --name anaconda3-5.2.0
 
 or create a virtual env
 ```
-
 pyenv virtualenv anaconda3-5.2.0 tf2.0-py3.6.5
 pyenv local tf2.0-py3.6.5
 python -m ipykernel install --user --name tf2.0-py3.6.5
+```
+
+if there is not ipykernel
+```
+pip install ipykernel
 ```
 
 in `Hydrogen`, choose `Hydrogen: Start Local Kernel`
