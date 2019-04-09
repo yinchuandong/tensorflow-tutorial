@@ -41,7 +41,6 @@ class MyModel(Model):
 
 model = MyModel()
 
-
 # %%
 
 loss_object = tf.keras.losses.SparseCategoricalCrossentropy()
@@ -82,14 +81,17 @@ def test_step(image, label):
 # %%
 
 
+
 EPOCHS = 5
 
 for epoch in range(EPOCHS):
     for image, label in mnist_train:
         train_step(image, label)
+        break
 
     for test_image, test_label in mnist_test:
         test_step(test_image, test_label)
+        break
 
     template = 'Epoch {}, Loss: {}, Accuracy: {}, Test Loss: {}, Test Accuracy: {}'
     print(template.format(epoch + 1,
@@ -98,5 +100,6 @@ for epoch in range(EPOCHS):
                           test_loss.result(),
                           test_accuracy.result() * 100))
 
+    break
 
 # %%
