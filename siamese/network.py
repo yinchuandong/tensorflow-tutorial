@@ -1,4 +1,5 @@
 # %%
+import time
 import torchvision
 import torchvision.utils
 import torchvision.datasets as dset
@@ -216,21 +217,34 @@ show_plot(counter, loss_history)
 
 folder_dataset_test = dset.ImageFolder(root=Config.testing_dir)
 siamese_dataset = SiameseNetworkDataset(imageFolderDataset=folder_dataset_test,
-                                        transform=transforms.Compose([transforms.Resize((100,100)),
+                                        transform=transforms.Compose([transforms.Resize((100, 100)),
                                                                       transforms.ToTensor()
-                                                                      ])
-                                       ,should_invert=False)
+                                                                      ]), should_invert=False)
 
-test_dataloader = DataLoader(siamese_dataset,num_workers=6,batch_size=1,shuffle=True)
+test_dataloader = DataLoader(
+    siamese_dataset, num_workers=6, batch_size=1, shuffle=True)
 dataiter = iter(test_dataloader)
-x0,_,_ = next(dataiter)
+x0, _, _ = next(dataiter)
 
 for i in range(10):
-    _,x1,label2 = next(dataiter)
-    concatenated = torch.cat((x0,x1),0)
+    _, x1, label2 = next(dataiter)
+    concatenated = torch.cat((x0, x1), 0)
     if has_gpu:
-        output1,output2 = net(Variable(x0).cuda(),Variable(x1).cuda())
+        output1, output2 = net(Variable(x0).cuda(), Variable(x1).cuda())
     else:
-        output1,output2 = net(Variable(x0),Variable(x1))
+        output1, output2 = net(Variable(x0), Variable(x1))
     euclidean_distance = F.pairwise_distance(output1, output2)
-    imshow(torchvision.utils.make_grid(concatenated),'Dissimilarity: {:.2f}'.format(euclidean_distance.item()))
+    imshow(torchvision.utils.make_grid(concatenated),
+           'Dissimilarity: {:.2f}'.format(euclidean_distance.item()))
+
+
+# %%
+
+start = time.time()
+net.forward_once(x0)
+end = time.time()
+
+print(start)
+print(end)
+print(end - start)
+# %%
