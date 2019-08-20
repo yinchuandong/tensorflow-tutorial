@@ -18,6 +18,11 @@ show kernels
 jupyter kernelspec list --json
 ```
 
+remove kernels:
+```
+jupyter kernelspec uninstall unwanted-kernel
+```
+
 
 In a certain python env, run 
 ```
